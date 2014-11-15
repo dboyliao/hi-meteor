@@ -1,14 +1,25 @@
 head 
-    title Practice Meteor!
+    title Practice Meteor
 
 body
-    h1 Practice Meteor
+    h1 Practice Meteor by Dboy
+    {{>loginButtons}}
     +self
-    h2 Posts
     +posts
 
 template(name="posts")
-    each testArray
+    hr
+    h1 New Posts
+    if user
+        div Your are {{ user.profile.name }}
+    else
+        div You are Anonymous
+    br
+    div Your post here:
+        input#insertPost
+    hr
+    h1 Posts
+    each postsArray
         +post
 
 template(name = "self")
