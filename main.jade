@@ -1,0 +1,29 @@
+head 
+    title Practice Meteor!
+
+body
+    h1 Practice Meteor
+    +self
+    h2 Posts
+    +posts
+
+template(name="posts")
+    each testArray
+        +post
+
+template(name = "self")
+    h2 My name is {{ testObj.name }}
+    h2 Birthday: {{ testObj.birth }}
+    h2 Height: {{ testObj.height }}
+    if testObj.male
+        h2 Gender: male
+    else
+        h2 Gender: female
+
+template(name='post')
+    hr
+    if author
+        h2 {{ author }} say: {{ text }}
+    else
+        h2 {{ text }}
+    hr
