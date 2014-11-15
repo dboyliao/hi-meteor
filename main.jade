@@ -1,15 +1,41 @@
 head 
     title Practice Meteor
 
-body
-    h1 Practice Meteor by Dboy
-    {{>loginButtons}}
-    +self
-    +posts
+template(name="layout")
+    +navBar
+    +yield
+
+template(name="navBar")
+  .navbar.navbar-inverse.navbar-fixed-top
+    .container
+      .navbar-header
+        button.navbar-toggle(type="button",data-toggle="collapse",data-target=".navbar-collapse")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+
+        a.navbar-brand(href="/") Home: Practice Meteor
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.nav.navbar-nav
+            a(href="#") About
+
+          li.nav.navbar-nav
+            a(href="#") Posts            
+
+        ul.nav.navbar-nav.navbar-right
+          //- li.nav.navbar-nav
+          //-   img.user-img.img-circle(src="{{user.profile.photo.thumb_link}}")
+          li
+            +loginButtons
+
+  .container
+    .row.clearfix
+      .col-md-12.column
 
 template(name="posts")
     hr
-    h1 New Posts
+    h1 New Post
     if user
         div Your are {{ user.profile.name }}
     else

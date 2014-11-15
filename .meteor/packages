@@ -9,6 +9,6 @@ mquandalle:jade
 coffeescript
 accounts-ui
 accounts-facebook
-accounts-google
 mizzao:bootstrap-3
+iron:router
 

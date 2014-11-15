@@ -6,6 +6,15 @@
 
 @Posts = new Meteor.Collection "posts"
 
+Router.configure
+    layoutTemplate: "layout"
+
+Meteor.startup ->
+    Route.map ->
+        @route "index",
+            path: "/"
+            template:"posts"
+
 reload = true
 if Meteor.isClient
 # Children's helpers will be export to parent's 
