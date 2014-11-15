@@ -6,6 +6,7 @@
 
 @Posts = new Meteor.Collection "posts"
 
+reload = true
 if Meteor.isClient
 # Children's helpers will be export to parent's 
 # helpers
@@ -18,23 +19,17 @@ if Meteor.isClient
     Template.posts.events
         "change input#insertPost": (e, t) ->
             e.stopPropagation()
-            user = Meteor.user()
-            if user
-                username = user.profile.name
-                userId = user._id
-            else
-                username = "Anonymous"
-                userId = "None"
-            
             text = $("input#insertPost").val()
-            data = 
-                text: text
-                author: username
-                userId: userId
-                createAt: new Date()
-            $("#userName").val("")
-            $("#insertPost").val("")
-            Posts.insert(data)
+
+            Meteor.call "insertPost", text, (err, data) ->
+                $("#insertPost").val("")
+                if not err
+                    console.log "data:"
+                    console.log data
+                else
+                    console.log "error:"
+                    console.log err
+
 
     Template.self.helpers
         testObj:
@@ -44,6 +39,24 @@ if Meteor.isClient
             male: true
 
 if Meteor.isServer
-    if Posts.find().count() is 0
-        Posts.insert post for post in testPosts
+    Meteor.methods
+        "insertPost": (text) ->
+            user = Meteor.user()
+
+            if user
+                username = user.profile.name
+                userId = user._id
+            else
+                # username = "Anonymous"
+                # userId = "None"
+                throw new Meteor.Error(401, "Login First to post!")
+            data = 
+                text: text
+                author: username
+                userId: userId
+                createAt: new Date()
+            Posts.insert data
+
+    # if Posts.find().count() is 0
+    #     Posts.insert post for post in testPosts
 

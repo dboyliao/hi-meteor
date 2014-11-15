@@ -7,8 +7,8 @@ meteor-platform
 autopublish
 mquandalle:jade
 coffeescript
-insecure
 accounts-ui
 accounts-facebook
 accounts-google
+mizzao:bootstrap-3
 
