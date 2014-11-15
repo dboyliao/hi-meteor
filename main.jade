@@ -1,11 +1,7 @@
 head 
     title Practice Meteor
 
-template(name="layout")
-    +navBar
-    +yield
-
-template(name="navBar")
+body
   .navbar.navbar-inverse.navbar-fixed-top
     .container
       .navbar-header
@@ -32,6 +28,9 @@ template(name="navBar")
   .container
     .row.clearfix
       .col-md-12.column
+    h1 Practice Meteor by Dboy
+    +self
+    +posts
 
 template(name="posts")
     hr
